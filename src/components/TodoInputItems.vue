@@ -2,6 +2,7 @@
 div
     input(type="text" v-model="newTodoItem" @keyup.enter="addTodo")
     button(@click="addTodo") add
+    
 
 </template>
 
@@ -25,7 +26,7 @@ export default {
     methods:{
         addTodo(){
             if (this.newTodoItem !== '') {
-                const obj = {completed: false, item: this.newTodoItem }
+                const obj = {completed: false, item: this.newTodoItem, edit: false}
                 localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
                 this.todoItems = [...this.value, obj];
 

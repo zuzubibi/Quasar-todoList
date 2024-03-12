@@ -2,19 +2,36 @@
     <div>
         <ul>
             <li v-for="(todoItem, index) in value" :key="todoItem.item" class="shadow">
-                <q-icon name="check" v-bind:class="{checkBtnCompleted: todoItem.completed}" 
-                 v-on:click="toggleComplete(todoItem, index)" ></q-icon>
+                <!-- 1. 체크여부 기능 -->
+                <span 
+                v-on:click="toggleComplete(todoItem, index)"
+                v-bind:class="{checkBtnCompleted: todoItem.completed}">
+                    <q-icon name="check"></q-icon>
+                </span>
 
-                <span v-bind:class="{textCompleted: todoItem.completed}" >
+                <!-- 할일 -->
+                <span id="here" :class="{textCompleted: todoItem.completed }" :contenteditable="todoItem.edit">
                     {{ todoItem.item }}
                 </span>
-                
-                <!-- 삭제 기능 -->
-                <!-- 1. 아이콘 없는 버전 -->
+
+                <!-- 2. 삭제 기능 -->
+                <!-- (1) 아이콘 없는 버전 -->
                 <!-- <button v-on:click="removeTodo(todoItem, index)">delete</button> -->
-                <!-- 2. 아이콘 있는 버전 -->
+
+                <!-- (2) 아이콘 있는 버전 -->
                 <span v-on:click="removeTodo(todoItem, index)">
                     <q-icon name="delete"></q-icon>
+                </span>
+
+                <!-- 3. 수정 기능 -->
+                <span >
+                    <div v-if="todoItem.edit===false">
+                        <q-btn label="수정" v-on:click="editTodo(todoItem, index)"></q-btn>
+                    </div>
+                    <div v-else>
+                        <q-btn push color="primary" label="완료" v-on:click="editOk(todoItem, index)"/>
+                        <q-btn push color="primary" label="취소" v-on:click="editNo(todoItem, index)" />
+                    </div>
                 </span>
             </li>
         </ul>
@@ -26,6 +43,16 @@ export default {
     props: ['value'],
     data(){
         return {
+            val: "",
+        }
+    },
+    watch:{
+        editTodo(oldval, newval){
+            if (oldval !== newval){
+                console.log(oldval)
+                console.log(newval)
+                // console.log("여기가 마지막");
+            }
         }
     },
     methods: {
@@ -52,12 +79,27 @@ export default {
             localStorage.removeItem(todoItem.item);
             
             const newarr = [...this.value];
+            console.log(newarr[index]);
             newarr.splice(index, 1);
-            console.log(newarr);
 
             this.$emit('input', newarr);
+        },
+        editTodo(todoItem, index){
+            todoItem.edit = true;
+            this.val = document.getElementById("here").innerHTML
+            this.val = this.val.trim()
+            // console.log(val)
+        },
+        editOk(todoItem, index){
+            todoItem.edit = false;
+            console.log(this.val);
+            
+        },
+        editNo(todoItem,index){
+            todoItem.edit = false;
+            console.log(this.val);
         }
-    },
+    }
    
 }
 </script>
