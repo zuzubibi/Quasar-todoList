@@ -16,18 +16,26 @@ export default {
             return date.formatDate(timeStamp, 'dddd D MMMM')
         }
     }
-
-
 }
 </script>
 
 <style lang="stylus" scoped>
+$primary-color = #5378fb
+$secondary-color = #8763fb
+
 .q-layout
-    background-color #64ffda
-    padding 20px
-.header-image
-    height 100%
-    z-index -1
-    opacity 0.3
-    filter grayscale(100%)
+    color white
+    background linear-gradient(to right, $primary-color, $secondary-color)
+    padding 15px
+    opacity 0.85
+
+    .q-px-lg.q-pt-xl.q-mb-md
+        .text-h3
+            margin-bottom 9px
+            font-weight bold
+
+        .text-subtitle1
+            font-size 17px
+            font-weight bold
+
 </style>
