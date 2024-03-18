@@ -88,5 +88,6 @@ input:focus
     .addBtn
         color white
         vertical-align middle
+        font-size 20px
 
 </style>

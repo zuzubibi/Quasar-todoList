@@ -45,7 +45,6 @@ export default {
     methods: {
         toggleComplete(todoItem, index){
             // this.$emit('toggleItem', todoItem, index)
-
             // 원래 기존거 삭제
             localStorage.removeItem(todoItem.item);
 
