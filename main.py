@@ -1,7 +1,3 @@
-import requests
-import uuid
-import time
-import json
 import uvicorn
 import urllib.request
 import urllib.parse
@@ -55,6 +51,7 @@ def getUrl():
     return url
 @app.get('url/getToken')
 def GetToken():
+    print("잘 들어옴")
 
     return 
 # @app.get('/url/getToken')
