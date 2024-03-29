@@ -1,8 +1,15 @@
 import axios from "axios";
 
-function registerUser(){
-    const url = 'http://localhost:3000/singup';
-    return axios.post(url);
+const instance = axios.create({
+    baseURL: "http://localhost:8000/"
+})
+
+function RequestToken(){
+    return instance.get('url');
 }
 
-export { registerUser};
+function GetToken(){
+    return instance.get('url/getToken');
+}
+
+export { RequestToken, GetToken };

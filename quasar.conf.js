@@ -9,7 +9,10 @@
 // https://v1.quasar.dev/quasar-cli/quasar-conf-js
 
 const ESLintPlugin = require('eslint-webpack-plugin')
-
+const envparser = require('./config/envparser')
+// const env = require('dotenv').config({
+//   path: `.env.${process.env.ENV_FILE}`,
+// }).parsed;
 module.exports = function (/* ctx */) {
   return {
     // https://v1.quasar.dev/quasar-cli/supporting-ts
@@ -47,8 +50,11 @@ module.exports = function (/* ctx */) {
 
     // Full list of options: https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
-      vueRouterMode: 'hash', // available values: 'hash', 'history'
-
+      vueRouterMode: 'history', // available values: 'hash', 'history'
+      // env: {
+      //   API_URL: JSON.stringify(process.env.API_URL)
+      // },
+      env: envparser(),
       // transpile: false,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
